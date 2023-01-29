@@ -9,3 +9,6 @@ provider:
 functions:
   hello:
     handler: handler.hello
+  reset-menu:
+    handler: reset-menu.reset_menu
+
