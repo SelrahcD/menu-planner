@@ -9,6 +9,14 @@ provider:
 functions:
   hello:
     handler: handler.hello
+
   reset-menu:
     handler: reset-menu.reset_menu
+    events:
+      - httpApi:
+          method: GET
+          path: /reset-menu
+    environment:
+      NOTION_KEY: ${ssm:/menu-planner/dev/notion/api-key}
+      NOTION_DATABASE_ID: ${ssm:/menu-planner/dev/notion_database_id}
 
