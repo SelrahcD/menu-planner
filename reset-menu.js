@@ -6,51 +6,51 @@ const notion = new Client({auth: process.env.NOTION_KEY})
 
 const databaseId = process.env.NOTION_DATABASE_ID
 
-async function cleanMenu(text) {
+async function clearMenu() {
 
-        const pages = await notion.databases.query({database_id: databaseId})
+    const pages = await notion.databases.query({database_id: databaseId})
 
-        await Promise.all(
-            pages.results.map(page => notion.pages.update({
-                    page_id: page.id,
-                    properties: {
-                        "Nouveau Plat": {
-                            rich_text: [
-                                {
-                                    text: {
-                                        content: ''
-                                    }
+    await Promise.all(
+        pages.results.map(page => notion.pages.update({
+                page_id: page.id,
+                properties: {
+                    "Nouveau Plat": {
+                        rich_text: [
+                            {
+                                text: {
+                                    content: ''
                                 }
-                            ]
-                        },
-                        "Nouveau Plat URL": {
-                            url: null
-                        },
-                        "Recette": {
-                            relation: []
-                        },
-                        Pour: {
-                            select: {
-                                name: '👫'
                             }
-                        },
-                    }
-                })
-            )
-        );
+                        ]
+                    },
+                    "Nouveau Plat URL": {
+                        url: null
+                    },
+                    "Recette": {
+                        relation: []
+                    },
+                    Pour: {
+                        select: {
+                            name: '👫'
+                        }
+                    },
+                }
+            })
+        )
+    );
 }
 
 
 export const reset_menu = async (event) => {
 
     try {
-        await cleanMenu("Yurts in Big Sur, California")
+        await clearMenu()
 
         return {
             statusCode: 200,
             body: JSON.stringify(
                 {
-                    message: 'Menu reseted',
+                    message: 'Menu was cleared',
                     input: event,
                 },
                 null,
@@ -71,6 +71,4 @@ export const reset_menu = async (event) => {
             ),
         };
     }
-
-
 };
