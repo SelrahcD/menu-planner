@@ -5,6 +5,7 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs14.x
+  stage: ${opt:stage, 'dev'}
 
 functions:
   hello:
@@ -17,6 +18,6 @@ functions:
           method: GET
           path: /reset-menu
     environment:
-      NOTION_KEY: ${ssm:/menu-planner/dev/notion/api-key}
-      NOTION_DATABASE_ID: ${ssm:/menu-planner/dev/notion_database_id}
+      NOTION_KEY: ${ssm:/menu-planner/${self:provider.stage}/notion/api-key}
+      NOTION_DATABASE_ID: ${ssm:/menu-planner/${self:provider.stage}/notion_database_id}
 
