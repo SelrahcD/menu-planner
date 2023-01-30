@@ -8,9 +8,6 @@ provider:
   stage: ${opt:stage, 'dev'}
 
 functions:
-  hello:
-    handler: handler.hello
-
   reset-menu:
     handler: reset-menu.reset_menu
     events:
