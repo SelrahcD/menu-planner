@@ -14,7 +14,7 @@ async function cleanMenu(text) {
             pages.results.map(page => notion.pages.update({
                     page_id: page.id,
                     properties: {
-                        Recette: {
+                        "Nouveau Plat": {
                             rich_text: [
                                 {
                                     text: {
@@ -23,16 +23,13 @@ async function cleanMenu(text) {
                                 }
                             ]
                         },
-                        URL: {
-                            rich_text: [
-                                {
-                                    text: {
-                                        content: ''
-                                    }
-                                }
-                            ]
+                        "Nouveau Plat URL": {
+                            url: null
                         },
-                        Tags: {
+                        "Recette": {
+                            relation: []
+                        },
+                        Pour: {
                             select: {
                                 name: '👫'
                             }
